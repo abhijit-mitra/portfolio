@@ -136,6 +136,41 @@
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-photo {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow:
+        0 30px 80px rgba(88,166,255,0.18),
+        0 0 0 1px rgba(88,166,255,0.35),
+        0 0 0 6px rgba(88,166,255,0.08);
+    }
+
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--accent2), var(--accent));
+      opacity: 0.15;
+      z-index: -1;
+      filter: blur(20px);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
 .hero h1 {
@@ -823,6 +858,8 @@
       }
       .hamburger { display: flex; }
       .hero { padding: 100px 20px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-photo { width: 180px; height: 180px; order: -1; margin: 0 auto; }
       section { padding: 60px 20px; }
       .stats { padding: 40px 20px; }
       .about-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -858,7 +895,8 @@
 <!-- ─── HERO ─────────────────────────────────────────────── -->
 <section class="hero" id="home">
   <div class="hero-inner">
-<h1>
+    <div class="hero-text">
+    <h1>
       Abhijit<br>
       <span class="name-accent">Mitra</span>
     </h1>
@@ -890,6 +928,10 @@
         <span class="company-pill">CoWrks → Brookfield</span>
         <span class="company-pill">HurixDigital</span>
       </div>
+    </div>
+    </div>
+    <div class="hero-photo">
+      <img src="headshot.jpg" alt="Abhijit Mitra" width="320" height="320">
     </div>
   </div>
 </section>
