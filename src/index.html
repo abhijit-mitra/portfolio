@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhijit Mitra — Engineering Leader</title>
+  <meta name="description" content="Director of Engineering with 10+ years building and scaling high-performance SaaS platforms. Distributed systems, AI/ML, cloud architecture.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #1c2128;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #f78166;
+      --purple: #bc8cff;
+      --text: #e6edf3;
+      --text2: #c9d1d9;
+      --muted: #8b949e;
+      --radius: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.8; }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(48,54,61,0.5);
+      transition: all 0.3s;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); opacity: 1; }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #0d1117 !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85 !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(88,166,255,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(63,185,80,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+.hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .name-accent { color: var(--accent); }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: var(--text2);
+      max-width: 580px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(88,166,255,0.3); opacity: 1; }
+
+    .btn-secondary {
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); opacity: 1; }
+
+    .hero-companies {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-companies-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .company-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .company-pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ─── STATS ───────────────────────────────────────── */
+    .stats {
+      padding: 60px 40px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 38px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ─── SECTION COMMONS ─────────────────────────────── */
+    section {
+      padding: 80px 40px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    #about { background: var(--bg); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text2);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-highlight {
+      background: rgba(88,166,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 24px;
+    }
+
+    .about-highlight p {
+      color: var(--text2);
+      font-size: 15px;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .about-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .about-card:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .about-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .about-card-icon {
+      font-size: 18px;
+    }
+
+    .about-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── EXPERIENCE ──────────────────────────────────── */
+    #experience { background: var(--bg2); }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--bg2));
+    }
+
+    .timeline-entry {
+      padding-left: 32px;
+      padding-bottom: 48px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .timeline-entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -6px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg2);
+      z-index: 1;
+    }
+
+    .timeline-dot.current {
+      background: var(--accent2);
+      box-shadow: 0 0 12px rgba(63,185,80,0.5);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .timeline-company {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--bg3);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .timeline-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .timeline-desc {
+      list-style: none;
+    }
+
+    .timeline-desc li {
+      font-size: 14px;
+      color: var(--text2);
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .timeline-desc li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 11px;
+      top: 6px;
+    }
+
+    .timeline-desc .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-desc .highlight2 {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.2);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .tag.green {
+      background: rgba(63,185,80,0.1);
+      border-color: rgba(63,185,80,0.2);
+      color: var(--accent2);
+    }
+
+    .tag.purple {
+      background: rgba(188,140,255,0.1);
+      border-color: rgba(188,140,255,0.2);
+      color: var(--purple);
+    }
+
+    .earlier-exp {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: -24px;
+    }
+
+    .earlier-exp-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .earlier-entry {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .earlier-entry:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .earlier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .earlier-role {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .earlier-company {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .earlier-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .earlier-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* ─── SKILLS ──────────────────────────────────────── */
+    #skills { background: var(--bg); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .skill-card-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .skill-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .skill-pill {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ─── ACHIEVEMENTS ────────────────────────────────── */
+    #achievements { background: var(--bg2); }
+
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .achieve-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.2s;
+    }
+
+    .achieve-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .achieve-card:hover { border-color: var(--accent); }
+
+    .achieve-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .achieve-metric {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .achieve-metric.blue { color: var(--accent); }
+    .achieve-metric.green { color: var(--accent2); }
+    .achieve-metric.purple { color: var(--purple); }
+    .achieve-metric.orange { color: #f0883e; }
+
+    .achieve-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .achieve-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── EDUCATION ───────────────────────────────────── */
+    #education { background: var(--bg); }
+
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      max-width: 520px;
+    }
+
+    .edu-icon {
+      width: 56px; height: 56px;
+      border-radius: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .edu-degree {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .edu-school {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .edu-year {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-title {
+      margin-bottom: 16px;
+    }
+
+    .contact-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ─── FADE-IN ─────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 56px; left: 0; right: 0;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        padding: 20px;
+        gap: 20px;
+      }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 20px; }
+      .stats { padding: 40px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .timeline::before { left: 0; }
+      .timeline-entry { padding-left: 28px; }
+      .footer { padding: 24px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .stat-number { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-logo">AM<span>.</span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+<h1>
+      Abhijit<br>
+      <span class="name-accent">Mitra</span>
+    </h1>
+    <div class="hero-subtitle">Director of Engineering</div>
+    <p class="hero-tagline">
+      Engineering leader with 10+ years scaling high-performance SaaS platforms. Built systems handling 300M–1B+ API requests/day, scaled teams from 0 to 35+, and drove products from inception to $7M+ ARR.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Get in Touch
+      </a>
+      <a href="https://www.linkedin.com/in/abhijit-mitra-a238ab13b/" target="_blank" class="btn-secondary">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.73a1.77 1.77 0 110-3.54 1.77 1.77 0 010 3.54zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77C14.4 7.74 20 7.55 20 12.76V19z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="hero-companies">
+      <span class="hero-companies-label">Worked at</span>
+      <div class="company-pills">
+        <span class="company-pill">Parspec</span>
+        <span class="company-pill">Spotnana</span>
+        <span class="company-pill">Locus.sh → IKEA</span>
+        <span class="company-pill">Tekion ($4B)</span>
+        <span class="company-pill">CoWrks → Brookfield</span>
+        <span class="company-pill">HurixDigital</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─────────────────────────────────────────────── -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number" data-target="10" data-suffix="+">0</div>
+      <div class="stat-label">Years of<br>Engineering Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="35" data-suffix="+">0</div>
+      <div class="stat-label">Engineers<br>Built & Managed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="76" data-suffix="%">0</div>
+      <div class="stat-label">Cloud Cost<br>Reduction Achieved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="80" data-suffix="%+">0</div>
+      <div class="stat-label">Dev Velocity Increase<br>via AI Pipeline</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-prefix="$" data-target="7" data-suffix="M+">0</div>
+      <div class="stat-label">ARR Driven<br>at Parspec</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="1" data-suffix="B+">0</div>
+      <div class="stat-label">API Requests/Day<br>at Peak Scale</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About Me</div>
+    <div class="section-title">Engineering leader who scales<br>systems <em>and</em> teams.</div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I'm a Director of Engineering with 10+ years of experience building and scaling high-performance SaaS platforms — from logistics and supply-chain at <strong>Locus.sh</strong> to AI-powered product data at <strong>Parspec</strong>.
+        </p>
+        <p>
+          My sweet spot is the intersection of technical depth and leadership breadth: architecting distributed systems that survive peak traffic while simultaneously growing engineering organizations from zero to high-performing teams.
+        </p>
+        <p>
+          I've been a founding engineer three times, scaled through four high-growth startups, led SOC 2 compliance, pioneered AI-powered development pipelines, and driven cloud cost from $288K to $70K/month.
+        </p>
+        <div class="about-highlight">
+          <p>"Proven track record across successful startup journeys — Tekion (→$4B), Spotnana (→$1.2B unicorn), Locus.sh (acquired by IKEA/Ingka Group), and Parspec (→$7M+ ARR)."</p>
+        </div>
+      </div>
+      <div class="about-cards fade-in">
+        <div class="about-card">
+          <div class="about-card-title"><span class="about-card-icon">🏗️</span> Distributed Systems</div>
+          <div class="about-card-desc">Built systems handling 300M–1B+ API requests/day during peak sale events (Myntra EORS, Harbolnas). 15,000–30,000+ RPS with zero-downtime surge architecture.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title"><span class="about-card-icon">🤖</span> AI-Powered Development</div>
+          <div class="about-card-desc">Pioneered end-to-end agentic development pipeline with Claude, OpenRouter, OpenClaw, Hermes Agent, and MCP (Jira, Confluence, Figma) — automated code review, self-healing tests, and CI/CD. 80%+ velocity increase.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title"><span class="about-card-icon">👥</span> Team Builder</div>
+          <div class="about-card-desc">Scaled engineering from 0 to 35+ engineers including 4 EMs and an AppSec Lead. Conducted 200+ technical interviews in a single quarter with a high hiring bar.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title"><span class="about-card-icon">🔒</span> Security & Compliance</div>
+          <div class="about-card-desc">Led SOC 2 Type I & II audits with 95%+ compliance year-round. Set up MDM (JumpCloud), endpoint protection (Bitdefender), VDP (HackerOne), AWS GuardDuty & Inspector.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title"><span class="about-card-icon">☁️</span> Cloud Cost Optimization</div>
+          <div class="about-card-desc">Reduced AWS spend from $288K to $70K/month (76%) via Savings Plans, Reserved Instances, ECS cluster optimization, and per-feature cost attribution tagging.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─────────────────────────────────────────── -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career</div>
+    <div class="section-title">Professional Experience</div>
+    <div class="timeline">
+
+      <!-- Parspec Director -->
+      <div class="timeline-entry">
+        <div class="timeline-dot current"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Director of Engineering</div>
+            <div class="timeline-company">Parspec</div>
+          </div>
+          <div class="timeline-date">Jan 2025 – Present</div>
+        </div>
+        <div class="timeline-meta">Bengaluru, India · AI-powered product data platform for the building industry</div>
+        <ul class="timeline-desc">
+          <li>Led engineering from inception to <span class="highlight">$7M+ ARR</span>. Scaled team from <span class="highlight">0 to 35+ engineers</span> including 4 EMs and 1 AppSec Lead.</li>
+          <li>Designed and operated systems handling <span class="highlight">20M+ daily requests</span> including CPU-intensive document processing, generation, and data pipelines.</li>
+          <li>Led SOC 2 Type I & II audits, maintaining <span class="highlight">95%+ compliance</span>. Set up MDM (JumpCloud), endpoint protection (Bitdefender), VDP (HackerOne).</li>
+          <li>Reduced AWS spend from <span class="highlight">$288K → $70K/month</span> (76% reduction) via Savings Plans, Reserved Instances, and architecture redesign.</li>
+          <li>Built an <span class="highlight">end-to-end AI-powered agentic dev pipeline</span> using Claude, OpenRouter, OpenClaw, and Hermes Agent — multi-agent orchestration with MCP integrations (Jira, Confluence, Figma), self-healing test loops, automated staging deployment. Increased dev velocity by <span class="highlight">80%+</span>.</li>
+          <li>Conducted <span class="highlight">200+ technical interviews in a single quarter</span> — highest in the organization.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">AWS</span><span class="tag">ECS</span><span class="tag">Python</span><span class="tag">Django</span>
+          <span class="tag green">SOC 2</span><span class="tag green">Security</span>
+          <span class="tag purple">AI/Agents</span><span class="tag purple">Claude</span><span class="tag purple">MCP</span>
+        </div>
+      </div>
+
+      <!-- Parspec Lead -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Lead Engineer</div>
+            <div class="timeline-company">Parspec</div>
+          </div>
+          <div class="timeline-date">Apr 2022 – Jan 2025</div>
+        </div>
+        <ul class="timeline-desc">
+          <li>Managed <span class="highlight">13 engineers</span> including Staff engineers across frontend and backend.</li>
+          <li>Reduced Alternate Product search engine P90 latency from <span class="highlight">10s → under 2s</span> (top 500 manufacturers).</li>
+          <li>Reduced Document search P90 latency from <span class="highlight">8s → 2s</span>.</li>
+          <li>Built high-throughput Inventory Management System capable of ingesting <span class="highlight">10M+ products in a single bulk upload</span> with zero downtime.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span>
+          <span class="tag">Elasticsearch</span><span class="tag">Redis</span><span class="tag">Performance</span>
+        </div>
+      </div>
+
+      <!-- Spotnana -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Founding Engineer</div>
+            <div class="timeline-company">Spotnana <span style="color:var(--muted); font-weight:400; font-size:13px;">→ $1.2B Unicorn</span></div>
+          </div>
+          <div class="timeline-date">Jul 2021 – Apr 2022</div>
+        </div>
+        <div class="timeline-meta">Bengaluru, India · Cloud-native B2B travel management platform</div>
+        <ul class="timeline-desc">
+          <li>Designed foundational backend systems for end-to-end travel booking across <span class="highlight">all verticals — Flight, Hotel, Rail, Car, and Limo</span>.</li>
+          <li>Built deep integrations with <span class="highlight">Sabre GDS</span> for reservations, ticketing, and global travel workflows.</li>
+          <li>Engineered scalable APIs for complex travel data — itineraries, pricing, availability, and booking state transitions.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">Go</span><span class="tag">Microservices</span><span class="tag">Sabre GDS</span><span class="tag">Distributed Systems</span>
+        </div>
+      </div>
+
+      <!-- Locus -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Senior Software Engineer</div>
+            <div class="timeline-company">Locus.sh <span style="color:var(--muted); font-weight:400; font-size:13px;">→ Acquired by IKEA/Ingka Group</span></div>
+          </div>
+          <div class="timeline-date">Jul 2020 – Jul 2021</div>
+        </div>
+        <div class="timeline-meta">Bengaluru, India · Enterprise logistics optimization platform</div>
+        <ul class="timeline-desc">
+          <li>Served Myntra, BigBasket, Delhivery, Bukalapak, Unilever — <span class="highlight">1.5–2M deliveries/day at BAU</span>, scaling to <span class="highlight">5–8M deliveries/day</span> during peak events, generating <span class="highlight">300M–1B+ API requests/day</span>.</li>
+          <li>Built compute-intensive <span class="highlight">route optimization</span> solving NP-hard problems with 180+ variables — achieving <span class="highlight">10–20x trip efficiency improvement</span>.</li>
+          <li>Designed high-throughput backend handling <span class="highlight">peak bursts of 15,000–30,000+ RPS</span> across order ingestion, geocoding, real-time tracking, and dispatch.</li>
+          <li>Built surge-resilient architecture with queue-based decoupling, geospatial indexing, pre-computed route caching, and solver parallelization.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">Python</span><span class="tag">Kafka</span><span class="tag">Route Optimization</span>
+          <span class="tag">Geospatial</span><span class="tag green">Scale</span>
+        </div>
+      </div>
+
+      <!-- Earlier -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="earlier-exp">
+          <div class="earlier-exp-title">Earlier Experience</div>
+
+          <div class="earlier-entry">
+            <div class="earlier-header">
+              <span><span class="earlier-role">Senior Developer</span> · <span class="earlier-company">CoWrks</span></span>
+              <span class="earlier-date">Jan 2019 – Jul 2020</span>
+            </div>
+            <div class="earlier-meta">Bengaluru · Premium coworking platform (acquired by Brookfield in $2B deal) · 44 centers, 8 cities</div>
+            <ul class="timeline-desc">
+              <li>Built Nucleus (admin portal) and Launchpad (client platform) powering end-to-end coworking ops — member onboarding, KYC, e-sign contracts, payments, space booking.</li>
+              <li>Designed multi-tenant architecture with role-based access, automated invoicing, and real-time occupancy tracking.</li>
+            </ul>
+          </div>
+
+          <div class="earlier-entry">
+            <div class="earlier-header">
+              <span><span class="earlier-role">Founding Engineer</span> · <span class="earlier-company">Tekion Corp</span></span>
+              <span class="earlier-date">Feb 2018 – Jan 2019</span>
+            </div>
+            <div class="earlier-meta">Bengaluru · Cloud-native DMS disrupting CDK/Reynolds duopoly (now $4B valuation) · Founded by former Tesla CIO</div>
+            <ul class="timeline-desc">
+              <li>Joined at seed stage. Built core modules — Scheduling, Vehicle Inspection, Promotions — for the industry's first cloud-native Dealer Management System.</li>
+              <li>Established early architecture patterns for a microservices-based AWS platform now serving 800+ dealerships across 52 OEM brands.</li>
+            </ul>
+          </div>
+
+          <div class="earlier-entry">
+            <div class="earlier-header">
+              <span><span class="earlier-role">Software Engineer</span> · <span class="earlier-company">HurixDigital</span></span>
+              <span class="earlier-date">Feb 2016 – Feb 2018</span>
+            </div>
+            <div class="earlier-meta">Mumbai · AI-powered EdTech & digital content platform · 15M+ users, 32 countries</div>
+            <ul class="timeline-desc">
+              <li>Built interactive content delivery for McGraw Hill, Oxford University Press, and Pearson. Platform serves 15M+ users across 32 countries in 25+ languages.</li>
+              <li>Engineered cross-platform compatibility (web, iOS, Android) with DRM-enabled content delivery.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Tech Stack</div>
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(88,166,255,0.1);">⚙️</div>
+          <div class="skill-card-title">Languages</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">JavaScript (ES6+)</span>
+          <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">Go</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(63,185,80,0.1);">🔧</div>
+          <div class="skill-card-title">Backend</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Django</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Express.js</span>
+          <span class="skill-pill">GraphQL</span>
+          <span class="skill-pill">Distributed Systems</span>
+          <span class="skill-pill">Microservices</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(188,140,255,0.1);">🤖</div>
+          <div class="skill-card-title">AI / Agentic Dev</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Claude Code</span>
+          <span class="skill-pill">OpenRouter</span>
+          <span class="skill-pill">OpenClaw</span>
+          <span class="skill-pill">Hermes Agent</span>
+          <span class="skill-pill">Multi-Agent Orchestration</span>
+          <span class="skill-pill">Sub-Agent Architectures</span>
+          <span class="skill-pill">MCP (Jira, Confluence, Figma)</span>
+          <span class="skill-pill">Hooks</span>
+          <span class="skill-pill">Persistent Agent Memory</span>
+          <span class="skill-pill">Agentic CI/CD</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(240,136,62,0.1);">🎨</div>
+          <div class="skill-card-title">Frontend</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Redux</span>
+          <span class="skill-pill">Next.js</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(88,166,255,0.1);">🗄️</div>
+          <div class="skill-card-title">Databases & Messaging</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">MongoDB</span>
+          <span class="skill-pill">Redis</span>
+          <span class="skill-pill">Elasticsearch</span>
+          <span class="skill-pill">DynamoDB</span>
+          <span class="skill-pill">AWS SQS/SNS</span>
+          <span class="skill-pill">Kafka</span>
+          <span class="skill-pill">RabbitMQ</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(63,185,80,0.1);">☁️</div>
+          <div class="skill-card-title">Cloud & DevOps</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">AWS ECS</span>
+          <span class="skill-pill">CloudWatch</span>
+          <span class="skill-pill">Inspector</span>
+          <span class="skill-pill">GuardDuty</span>
+          <span class="skill-pill">Auto Scaling</span>
+          <span class="skill-pill">Cost Explorer</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">CI/CD</span>
+          <span class="skill-pill">Fluent Bit</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(247,129,102,0.1);">🔒</div>
+          <div class="skill-card-title">Security & Compliance</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">SOC 2 Type I & II</span>
+          <span class="skill-pill">MDM (JumpCloud)</span>
+          <span class="skill-pill">Bitdefender</span>
+          <span class="skill-pill">HackerOne VDP</span>
+          <span class="skill-pill">AWS GuardDuty</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(88,166,255,0.1);">🏆</div>
+          <div class="skill-card-title">Leadership</div>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Team Building (0→35+)</span>
+          <span class="skill-pill">OKR Management</span>
+          <span class="skill-pill">Agile/Scrum</span>
+          <span class="skill-pill">Technical Roadmapping</span>
+          <span class="skill-pill">Hiring</span>
+          <span class="skill-pill">Mentorship</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACHIEVEMENTS ────────────────────────────────────────── -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-label">Impact</div>
+    <div class="section-title">Key Achievements</div>
+    <div class="achieve-grid">
+
+      <div class="achieve-card">
+        <div class="achieve-icon">🚀</div>
+        <div class="achieve-metric blue">1B+</div>
+        <div class="achieve-label">API Requests/Day</div>
+        <div class="achieve-desc">Peak scale at Locus.sh during Myntra EORS and Indonesia Harbolnas. 15,000–30,000+ RPS with zero-downtime surge architecture.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">💰</div>
+        <div class="achieve-metric green">$7M+</div>
+        <div class="achieve-label">ARR Driven</div>
+        <div class="achieve-desc">Led Parspec's engineering journey from inception to $7M+ ARR through strong product and technology execution.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">📉</div>
+        <div class="achieve-metric orange">76%</div>
+        <div class="achieve-label">Cloud Cost Reduction</div>
+        <div class="achieve-desc">Cut AWS spend from $288K to $70K/month via Savings Plans, Reserved Instances, ECS optimization, and architecture redesign.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">⚡</div>
+        <div class="achieve-metric purple">80%+</div>
+        <div class="achieve-label">Dev Velocity Increase</div>
+        <div class="achieve-desc">Pioneered AI-powered agentic dev pipeline with Claude and MCP integrations. Automated code review, test generation with self-healing, and staging deployment.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">👥</div>
+        <div class="achieve-metric blue">35+</div>
+        <div class="achieve-label">Engineers Scaled To</div>
+        <div class="achieve-desc">Built engineering org from 0: 35+ engineers, 4 Engineering Managers, 1 AppSec Lead. 200+ technical interviews in a single quarter.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">🔒</div>
+        <div class="achieve-metric green">95%+</div>
+        <div class="achieve-label">SOC 2 Compliance</div>
+        <div class="achieve-desc">Led SOC 2 Type I & II audits maintaining 95%+ compliance year-round. Full security stack: MDM, endpoint protection, VDP.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">⚙️</div>
+        <div class="achieve-metric orange">10–20x</div>
+        <div class="achieve-label">Trip Efficiency Improvement</div>
+        <div class="achieve-desc">Route optimization solving NP-hard problems with 180+ variables per decision at Locus.sh — dispatch planning, dynamic scheduling, real-time ETA.</div>
+      </div>
+
+      <div class="achieve-card">
+        <div class="achieve-icon">🏦</div>
+        <div class="achieve-metric purple">$4B+</div>
+        <div class="achieve-label">Total Startup Value Built</div>
+        <div class="achieve-desc">Founding/early engineer at Tekion ($4B), Spotnana ($1.2B), Locus.sh (IKEA acquisition), and Parspec ($7M+ ARR) — four successful startup journeys.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ───────────────────────────────────────────── -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <div class="section-title">Academic Background</div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">B.Tech in Electronics and Communication Engineering</div>
+        <div class="edu-school">Gauhati University, Guwahati</div>
+        <div class="edu-year">2011 – 2015</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ──────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="section-inner contact-inner">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Let's build something great.</div>
+<div class="contact-links">
+      <a href="mailto:abhijitmitra.in@gmail.com" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        abhijitmitra.in@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/abhijit-mitra-a238ab13b/" target="_blank" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.73a1.77 1.77 0 110-3.54 1.77 1.77 0 010 3.54zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77C14.4 7.74 20 7.55 20 12.76V19z"/></svg>
+        LinkedIn
+      </a>
+      <a href="tel:+919706126127" class="contact-link">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+        +91-9706126127
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────── -->
+<footer>
+  <p>© 2026 Abhijit Mitra · Bengaluru, India · <a href="https://www.linkedin.com/in/abhijit-mitra-a238ab13b/" target="_blank">LinkedIn</a></p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+
+  // Close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+    });
+  });
+
+  // Intersection Observer for fade-in and timeline animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in, .timeline-entry, .achieve-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Counter animation for stat numbers
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const step = target / (duration / 16);
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = prefix + Math.floor(current) + suffix;
+    }, 16);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsEl = document.querySelector('.stats');
+  if (statsEl) statsObserver.observe(statsEl);
+
+  // Stagger timeline entries
+  document.querySelectorAll('.timeline-entry').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+  // Stagger achieve cards
+  document.querySelectorAll('.achieve-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      navbar.style.padding = '10px 40px';
+    } else {
+      navbar.style.padding = '16px 40px';
+    }
+  });
+</script>
+</body>
+</html>
