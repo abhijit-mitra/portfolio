@@ -53,17 +53,21 @@
     }
 
     .nav-logo {
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text);
-      letter-spacing: -0.3px;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 0;
       text-decoration: none;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, filter 0.3s;
     }
 
-    .nav-logo:hover { opacity: 0.75; }
+    .nav-logo:hover { opacity: 1; filter: drop-shadow(0 0 8px rgba(88,166,255,0.45)); }
 
-    .nav-logo span { color: var(--accent); }
+    .logo-svg {
+      width: 70px;
+      height: 34px;
+      display: block;
+      overflow: visible;
+    }
 
     .nav-links {
       display: flex;
@@ -846,6 +850,239 @@
       transform: none;
     }
 
+    /* ─── AI / FUTURISTIC LAYER ───────────────────────── */
+    .hero-inner { position: relative; z-index: 2; }
+
+    /* Premium AM monogram logo */
+    .logo-svg .seg {
+      opacity: 0;
+      transform-origin: 50% 50%;
+      transform-box: fill-box;
+      will-change: transform, opacity;
+      animation: logo-assemble 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .logo-svg .seg-a1  { animation-delay: 60ms;  --tx: -28px; --ty: -12px; --rot: -28deg; }
+    .logo-svg .seg-a2  { animation-delay: 140ms; --tx:  28px; --ty: -12px; --rot:  28deg; }
+    .logo-svg .seg-a3  { animation-delay: 220ms; --tx:   0;    --ty:  22px; --rot:   0deg; }
+    .logo-svg .seg-m1  { animation-delay: 300ms; --tx: -24px; --ty:  16px; --rot: -32deg; }
+    .logo-svg .seg-m2  { animation-delay: 380ms; --tx: -10px; --ty: -22px; --rot:  38deg; }
+    .logo-svg .seg-m3  { animation-delay: 460ms; --tx:  10px; --ty: -22px; --rot: -38deg; }
+    .logo-svg .seg-m4  { animation-delay: 540ms; --tx:  24px; --ty:  16px; --rot:  32deg; }
+    .logo-svg .seg-dot { animation-delay: 640ms; --tx:   0;    --ty: -24px; --rot:   0deg; }
+
+    @keyframes logo-assemble {
+      0%   { opacity: 0;
+             transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.55); }
+      55%  { opacity: 1; }
+      100% { opacity: 1;
+             transform: translate(0, 0) rotate(0) scale(1); }
+    }
+    @keyframes logo-disassemble {
+      0%   { opacity: 1;
+             transform: translate(0, 0) rotate(0) scale(1); }
+      100% { opacity: 0;
+             transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.55); }
+    }
+
+    /* Custom AI cursor */
+    .ai-cursor, .ai-cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+      will-change: transform;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .ai-cursor {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(88,166,255,0.55);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+      box-shadow:
+        0 0 18px rgba(88,166,255,0.35),
+        inset 0 0 14px rgba(88,166,255,0.25);
+    }
+    .ai-cursor::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(188,140,255,0.45);
+      animation: spin 6s linear infinite;
+    }
+    .ai-cursor-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .ai-cursor.active { transform: translate(-50%,-50%) scale(1.6); border-color: var(--purple); }
+    body.ai-cursor-on { cursor: none; }
+    body.ai-cursor-on a, body.ai-cursor-on button { cursor: none; }
+    @media (hover: none), (max-width: 900px) {
+      body.ai-cursor-on { cursor: auto; }
+      body.ai-cursor-on a, body.ai-cursor-on button { cursor: pointer; }
+      .ai-cursor, .ai-cursor-dot { display: none; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spin-reverse {
+      to { transform: rotate(-360deg); }
+    }
+
+    /* Agent active nav badge */
+    .ai-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px 5px 10px;
+      border-radius: 999px;
+      background: rgba(63,185,80,0.08);
+      border: 1px solid rgba(63,185,80,0.3);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-right: 12px;
+      min-width: 120px;
+      justify-content: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .ai-status .pulse-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 0 rgba(63,185,80,0.6);
+      animation: pulse-dot 1.6s ease-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%   { box-shadow: 0 0 0 0 rgba(63,185,80,0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(63,185,80,0); }
+      100% { box-shadow: 0 0 0 0 rgba(63,185,80,0); }
+    }
+    .ai-status-text {
+      display: inline-block;
+      min-width: 70px;
+      text-align: left;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .ai-status { display: none; }
+    }
+
+    /* Floating AI tokens */
+    .floating-tokens {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .floating-token {
+      position: absolute;
+      font-family: 'JetBrains Mono', 'Menlo', monospace;
+      font-size: 12px;
+      color: rgba(88,166,255,0.35);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(88,166,255,0.25);
+      animation: drift linear infinite;
+    }
+    .floating-token.p { color: rgba(188,140,255,0.4); text-shadow: 0 0 10px rgba(188,140,255,0.25); }
+    .floating-token.g { color: rgba(63,185,80,0.4);  text-shadow: 0 0 10px rgba(63,185,80,0.25);  }
+    @keyframes drift {
+      0%   { transform: translate3d(0,0,0) rotate(var(--rot,0deg)); opacity: 0; }
+      10%  { opacity: 0.9; }
+      90%  { opacity: 0.9; }
+      100% { transform: translate3d(var(--dx,40px), var(--dy,-60px), 0) rotate(var(--rot,0deg)); opacity: 0; }
+    }
+
+    /* Subtitle typewriter caret */
+    .typewriter-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      vertical-align: -2px;
+      margin-left: 3px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Skill card neural graph overlay */
+    .skill-card { position: relative; overflow: hidden; }
+    .skill-card .skill-graph {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .skill-card:hover .skill-graph { opacity: 1; }
+    .skill-card .skill-graph line {
+      stroke: var(--accent);
+      stroke-width: 0.8;
+      stroke-dasharray: 4 4;
+      opacity: 0.55;
+      animation: dash 1.4s linear infinite;
+    }
+    @keyframes dash { to { stroke-dashoffset: -16; } }
+    .skill-card .skill-pills { position: relative; z-index: 1; }
+    .skill-pill { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .skill-card:hover .skill-pill {
+      border-color: rgba(88,166,255,0.4);
+      box-shadow: 0 0 12px rgba(88,166,255,0.15);
+    }
+
+    /* Holographic shimmer for achievement cards */
+    .achieve-card { position: relative; overflow: hidden; }
+    .achieve-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(115deg, transparent 0%, rgba(88,166,255,0.10) 45%, rgba(188,140,255,0.18) 50%, rgba(63,185,80,0.10) 55%, transparent 100%);
+      transform: skewX(-20deg);
+      transition: left 0.9s ease;
+      pointer-events: none;
+    }
+    .achieve-card:hover::after { left: 125%; }
+
+    /* Stat number subtle glow */
+    .stat-number { text-shadow: 0 0 22px rgba(88,166,255,0.18); }
+
+    /* Hero buttons subtle magnetic glow */
+    .btn-primary { position: relative; overflow: hidden; }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+    .btn-primary:hover::before { transform: translateX(100%); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .floating-token, .ai-cursor::before,
+      .skill-card .skill-graph line, .ai-status .pulse-dot,
+      .typewriter-caret, .logo-svg .seg {
+        animation: none !important;
+      }
+      .logo-svg .seg { opacity: 1 !important; transform: none !important; }
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -883,28 +1120,55 @@
 
 <!-- ─── NAV ─────────────────────────────────────────────── -->
 <nav id="navbar">
-  <a href="#home" class="nav-logo">AM<span>.</span></a>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
+  <a href="#home" class="nav-logo" id="navLogo" aria-label="Abhijit Mitra — home">
+    <svg class="logo-svg" viewBox="0 0 70 34" aria-hidden="true">
+      <defs>
+        <linearGradient id="lgMain" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="70" y2="34">
+          <stop offset="0%"   stop-color="#e6edf3"/>
+          <stop offset="55%"  stop-color="#58a6ff"/>
+          <stop offset="100%" stop-color="#bc8cff"/>
+        </linearGradient>
+      </defs>
+      <g class="logo-piece" fill="none" stroke="url(#lgMain)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <line class="seg seg-a1" x1="2"  y1="30" x2="14" y2="4"/>
+        <line class="seg seg-a2" x1="14" y1="4"  x2="26" y2="30"/>
+        <line class="seg seg-a3" x1="7"  y1="20" x2="21" y2="20"/>
+        <line class="seg seg-m1" x1="32" y1="30" x2="32" y2="4"/>
+        <line class="seg seg-m2" x1="32" y1="4"  x2="44" y2="18"/>
+        <line class="seg seg-m3" x1="44" y1="18" x2="56" y2="4"/>
+        <line class="seg seg-m4" x1="56" y1="4"  x2="56" y2="30"/>
+      </g>
+      <circle class="seg seg-dot" cx="62" cy="29" r="2.2" fill="#bc8cff"/>
+    </svg>
+  </a>
+  <div class="nav-right">
+    <div class="ai-status" title="AI agent status">
+      <span class="pulse-dot"></span>
+      <span class="ai-status-text" id="ai-status-text">Agent Online</span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
 <!-- ─── HERO ─────────────────────────────────────────────── -->
 <section class="hero" id="home">
+  <div class="floating-tokens" id="floatingTokens" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-text">
     <h1>
-      Abhijit<br>
-      <span class="name-accent">Mitra</span>
+      <span id="name-first">Abhijit</span><br>
+      <span class="name-accent" id="name-second" data-text="Mitra">Mitra</span>
     </h1>
-    <div class="hero-subtitle">Director of Engineering</div>
+    <div class="hero-subtitle" id="hero-subtitle" data-text="Director of Engineering"></div>
     <p class="hero-tagline">
       Engineering leader with 10+ years scaling high-performance SaaS platforms. Built systems handling 300M–1B+ API requests/day, scaled teams from 0 to 40+, and drove products from inception to $7M+ ARR. Pioneered AI-powered agentic development pipelines with multi-agent orchestration, reusable agent skills, and persistent agent memory — cutting dev cycles by 80%+.
     </p>
@@ -1425,6 +1689,10 @@
   <p>© 2026 Abhijit Mitra · Bengaluru, India · <a href="https://www.linkedin.com/in/abhijit-mitra-a238ab13b/" target="_blank">LinkedIn</a></p>
 </footer>
 
+<!-- AI cursor -->
+<div class="ai-cursor" id="aiCursor" aria-hidden="true"></div>
+<div class="ai-cursor-dot" id="aiCursorDot" aria-hidden="true"></div>
+
 <script>
   // Mobile nav toggle
   function toggleNav() {
@@ -1502,6 +1770,204 @@
       navbar.style.padding = '16px 40px';
     }
   });
+
+  /* ─── AI / FUTURISTIC LAYER ──────────────────────────── */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none)').matches || window.innerWidth < 900;
+
+  /* 1. Premium logo: disassemble → reassemble on hover/click */
+  (function initLogo() {
+    if (reduceMotion) return;
+    const logo = document.getElementById('navLogo');
+    if (!logo) return;
+    const segs = Array.from(logo.querySelectorAll('.seg'));
+    let playing = false;
+
+    function replay() {
+      if (playing) return;
+      playing = true;
+      segs.forEach((s, i) => {
+        s.style.animation = `logo-disassemble 0.45s cubic-bezier(0.4, 0, 0.6, 1) ${i * 35}ms forwards`;
+      });
+      const disassembleTime = (segs.length - 1) * 35 + 450;
+      setTimeout(() => {
+        segs.forEach((s, i) => {
+          // brief pause at scattered state, then assemble
+          s.style.animation = `logo-assemble 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 55}ms forwards`;
+        });
+        const assembleTime = (segs.length - 1) * 55 + 800;
+        setTimeout(() => { playing = false; }, assembleTime + 50);
+      }, disassembleTime + 80);
+    }
+
+    logo.addEventListener('mouseenter', replay);
+    logo.addEventListener('click', (e) => { /* allow scroll; just replay */ replay(); });
+  })();
+
+  /* 2. Custom AI cursor */
+  (function initCursor() {
+    if (isTouch || reduceMotion) return;
+    document.body.classList.add('ai-cursor-on');
+    const ring = document.getElementById('aiCursor');
+    const dot = document.getElementById('aiCursorDot');
+    let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+    let rx = tx, ry = ty;
+    let shown = false;
+
+    window.addEventListener('mousemove', (e) => {
+      tx = e.clientX; ty = e.clientY;
+      if (!shown) {
+        ring.style.opacity = '1'; dot.style.opacity = '1';
+        shown = true;
+      }
+    });
+    document.querySelectorAll('a, button, .skill-pill, .about-card, .achieve-card').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('active'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('active'));
+    });
+    function loop() {
+      rx += (tx - rx) * 0.18;
+      ry += (ty - ry) * 0.18;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+      dot.style.transform = `translate(${tx}px, ${ty}px) translate(-50%,-50%)`;
+      // keep cursor-active scale combined
+      if (ring.classList.contains('active')) {
+        ring.style.transform += ' scale(1.6)';
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+
+  /* 3. Text scramble decode for "Mitra" */
+  (function initDecode() {
+    if (reduceMotion) return;
+    const el = document.getElementById('name-second');
+    if (!el) return;
+    const final = el.dataset.text || el.textContent;
+    const chars = '01<>/{}[]#$%&*+=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let frame = 0;
+    const duration = 38;
+    function tick() {
+      let out = '';
+      for (let i = 0; i < final.length; i++) {
+        const reveal = Math.floor((frame / duration) * final.length);
+        if (i < reveal) out += final[i];
+        else out += chars[Math.floor(Math.random() * chars.length)];
+      }
+      el.textContent = out;
+      frame++;
+      if (frame <= duration) requestAnimationFrame(tick);
+      else el.textContent = final;
+    }
+    el.textContent = '';
+    requestAnimationFrame(tick);
+  })();
+
+  /* 4. Typewriter subtitle */
+  (function initTypewriter() {
+    const el = document.getElementById('hero-subtitle');
+    if (!el) return;
+    const text = el.dataset.text || '';
+    if (reduceMotion) { el.textContent = text; return; }
+    el.innerHTML = '<span class="tw-text"></span><span class="typewriter-caret"></span>';
+    const target = el.querySelector('.tw-text');
+    let i = 0;
+    setTimeout(function type() {
+      target.textContent = text.slice(0, i);
+      i++;
+      if (i <= text.length) setTimeout(type, 55 + Math.random() * 50);
+    }, 900);
+  })();
+
+  /* 5. Rotating Agent status text */
+  (function initAgentStatus() {
+    const el = document.getElementById('ai-status-text');
+    if (!el) return;
+    const states = ['Agent Online', 'Indexing…', 'Thinking…', 'Ready'];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % states.length;
+      el.style.opacity = '0';
+      setTimeout(() => { el.textContent = states[i]; el.style.opacity = '1'; }, 220);
+    }, 2800);
+    el.style.transition = 'opacity 0.22s';
+  })();
+
+  /* 6. Floating AI tokens in hero */
+  (function initTokens() {
+    if (reduceMotion) return;
+    const wrap = document.getElementById('floatingTokens');
+    if (!wrap) return;
+    const tokens = ['{agent}', 'MCP', '/skill', 'claude.run()', 'memory.search', 'await tool()', '∑ embeddings', 'hooks.post', '⟦neural⟧', 'topology: mesh', 'orchestrate()', 'reasoning…'];
+    const colors = ['', 'p', 'g'];
+    const count = window.innerWidth < 700 ? 5 : 9;
+
+    function spawn() {
+      const t = document.createElement('span');
+      t.className = 'floating-token ' + colors[Math.floor(Math.random() * colors.length)];
+      t.textContent = tokens[Math.floor(Math.random() * tokens.length)];
+      const startX = Math.random() * 100;
+      const startY = 30 + Math.random() * 60;
+      t.style.left = startX + '%';
+      t.style.top = startY + '%';
+      const dx = (Math.random() - 0.5) * 160;
+      const dy = -(60 + Math.random() * 120);
+      const rot = (Math.random() - 0.5) * 12;
+      const dur = 10 + Math.random() * 8;
+      t.style.setProperty('--dx', dx + 'px');
+      t.style.setProperty('--dy', dy + 'px');
+      t.style.setProperty('--rot', rot + 'deg');
+      t.style.animationDuration = dur + 's';
+      wrap.appendChild(t);
+      setTimeout(() => t.remove(), dur * 1000 + 200);
+    }
+    for (let i = 0; i < count; i++) setTimeout(spawn, i * 900);
+    setInterval(spawn, 1600);
+  })();
+
+  /* 7. Skill-card neural graph on hover */
+  (function initSkillGraph() {
+    if (reduceMotion) return;
+    document.querySelectorAll('.skill-card').forEach(card => {
+      const pillsWrap = card.querySelector('.skill-pills');
+      if (!pillsWrap) return;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'skill-graph');
+      svg.setAttribute('preserveAspectRatio', 'none');
+      card.appendChild(svg);
+
+      function build() {
+        const rect = card.getBoundingClientRect();
+        svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+        svg.setAttribute('width', rect.width);
+        svg.setAttribute('height', rect.height);
+        const pills = Array.from(card.querySelectorAll('.skill-pill'));
+        const points = pills.map(p => {
+          const r = p.getBoundingClientRect();
+          return {
+            x: r.left - rect.left + r.width / 2,
+            y: r.top - rect.top + r.height / 2
+          };
+        });
+        svg.innerHTML = '';
+        for (let i = 0; i < points.length; i++) {
+          for (let j = i + 1; j < points.length; j++) {
+            // connect only nearest few to keep it clean
+            const dx = points[i].x - points[j].x;
+            const dy = points[i].y - points[j].y;
+            if (Math.hypot(dx, dy) > 140) continue;
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', points[i].x); line.setAttribute('y1', points[i].y);
+            line.setAttribute('x2', points[j].x); line.setAttribute('y2', points[j].y);
+            svg.appendChild(line);
+          }
+        }
+      }
+      card.addEventListener('mouseenter', build);
+      window.addEventListener('resize', () => { if (card.matches(':hover')) build(); });
+    });
+  })();
 </script>
 </body>
 </html>
