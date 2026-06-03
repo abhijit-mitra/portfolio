@@ -6,6 +6,7 @@
   <title>Abhijit Mitra — Engineering Leader</title>
   <meta name="description" content="Director of Engineering with 10+ years building and scaling high-performance SaaS platforms. Distributed systems, AI/ML, cloud architecture.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin>
   <style>
     :root {
       --bg: #0d1117;
@@ -988,22 +989,47 @@
       z-index: 1;
       overflow: hidden;
     }
-    .floating-token {
+    .floating-item {
       position: absolute;
-      font-family: 'JetBrains Mono', 'Menlo', monospace;
-      font-size: 12px;
-      color: rgba(88,166,255,0.35);
-      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 11px 5px 8px;
+      border-radius: 999px;
+      background: rgba(22, 27, 34, 0.55);
+      border: 1px solid rgba(48, 54, 61, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(230,237,243,0.78);
+      letter-spacing: 0.2px;
       white-space: nowrap;
-      text-shadow: 0 0 10px rgba(88,166,255,0.25);
       animation: drift linear infinite;
+      opacity: 0;
+      will-change: transform, opacity;
     }
-    .floating-token.p { color: rgba(188,140,255,0.4); text-shadow: 0 0 10px rgba(188,140,255,0.25); }
-    .floating-token.g { color: rgba(63,185,80,0.4);  text-shadow: 0 0 10px rgba(63,185,80,0.25);  }
+    .floating-item.skill {
+      border-color: rgba(88,166,255,0.35);
+      box-shadow: 0 0 16px rgba(88,166,255,0.10);
+    }
+    .floating-item.company {
+      border-color: rgba(188,140,255,0.35);
+      box-shadow: 0 0 16px rgba(188,140,255,0.10);
+    }
+    .floating-item.text-only { padding-left: 11px; }
+    .floating-logo {
+      width: 14px;
+      height: 14px;
+      display: block;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
     @keyframes drift {
       0%   { transform: translate3d(0,0,0) rotate(var(--rot,0deg)); opacity: 0; }
-      10%  { opacity: 0.9; }
-      90%  { opacity: 0.9; }
+      12%  { opacity: 0.85; }
+      88%  { opacity: 0.85; }
       100% { transform: translate3d(var(--dx,40px), var(--dy,-60px), 0) rotate(var(--rot,0deg)); opacity: 0; }
     }
 
@@ -1075,7 +1101,7 @@
 
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
-      .floating-token, .ai-cursor::before,
+      .floating-item, .ai-cursor::before,
       .skill-card .skill-graph line, .ai-status .pulse-dot,
       .typewriter-caret, .logo-svg .seg {
         animation: none !important;
@@ -1894,36 +1920,98 @@
     el.style.transition = 'opacity 0.22s';
   })();
 
-  /* 6. Floating AI tokens in hero */
+  /* 6. Floating company + skill pills in hero */
   (function initTokens() {
     if (reduceMotion) return;
     const wrap = document.getElementById('floatingTokens');
     if (!wrap) return;
-    const tokens = ['{agent}', 'MCP', '/skill', 'claude.run()', 'memory.search', 'await tool()', '∑ embeddings', 'hooks.post', '⟦neural⟧', 'topology: mesh', 'orchestrate()', 'reasoning…'];
-    const colors = ['', 'p', 'g'];
-    const count = window.innerWidth < 700 ? 5 : 9;
+
+    // kind: 'company' or 'skill'; slug = simpleicons.org slug if available
+    const items = [
+      // Companies
+      { label: 'Parspec',      kind: 'company' },
+      { label: 'Spotnana',     kind: 'company' },
+      { label: 'IKEA',         kind: 'company', slug: 'ikea' },
+      { label: 'Locus.sh',     kind: 'company' },
+      { label: 'Tekion',       kind: 'company' },
+      { label: 'Brookfield',   kind: 'company' },
+      { label: 'CoWrks',       kind: 'company' },
+      { label: 'HurixDigital', kind: 'company' },
+      // Skills (slug = simpleicons.org)
+      { label: 'Python',         kind: 'skill', slug: 'python' },
+      { label: 'TypeScript',     kind: 'skill', slug: 'typescript' },
+      { label: 'JavaScript',     kind: 'skill', slug: 'javascript' },
+      { label: 'Go',             kind: 'skill', slug: 'go' },
+      { label: 'React',          kind: 'skill', slug: 'react' },
+      { label: 'Next.js',        kind: 'skill', slug: 'nextdotjs' },
+      { label: 'Redux',          kind: 'skill', slug: 'redux' },
+      { label: 'Node.js',        kind: 'skill', slug: 'nodedotjs' },
+      { label: 'Django',         kind: 'skill', slug: 'django' },
+      { label: 'GraphQL',        kind: 'skill', slug: 'graphql' },
+      { label: 'AWS',            kind: 'skill' },
+      { label: 'Docker',         kind: 'skill', slug: 'docker' },
+      { label: 'Kubernetes',     kind: 'skill', slug: 'kubernetes' },
+      { label: 'PostgreSQL',     kind: 'skill', slug: 'postgresql' },
+      { label: 'MongoDB',        kind: 'skill', slug: 'mongodb' },
+      { label: 'Redis',          kind: 'skill', slug: 'redis' },
+      { label: 'Elasticsearch',  kind: 'skill', slug: 'elasticsearch' },
+      { label: 'Kafka',          kind: 'skill', slug: 'apachekafka' },
+      { label: 'RabbitMQ',       kind: 'skill', slug: 'rabbitmq' },
+      { label: 'GitHub Actions', kind: 'skill', slug: 'githubactions' },
+      { label: 'Anthropic',      kind: 'skill', slug: 'anthropic' },
+      // AI / agentic — no logo, text only
+      { label: 'Claude Code',    kind: 'skill' },
+      { label: 'MCP',            kind: 'skill' },
+      { label: 'Multi-Agent',    kind: 'skill' },
+    ];
+
+    // shuffle so initial spawns are varied
+    const queue = items.slice().sort(() => Math.random() - 0.5);
+    let qi = 0;
+    function nextItem() {
+      if (qi >= queue.length) { queue.sort(() => Math.random() - 0.5); qi = 0; }
+      return queue[qi++];
+    }
+
+    const initialCount = window.innerWidth < 700 ? 4 : 7;
 
     function spawn() {
-      const t = document.createElement('span');
-      t.className = 'floating-token ' + colors[Math.floor(Math.random() * colors.length)];
-      t.textContent = tokens[Math.floor(Math.random() * tokens.length)];
-      const startX = Math.random() * 100;
-      const startY = 30 + Math.random() * 60;
-      t.style.left = startX + '%';
-      t.style.top = startY + '%';
-      const dx = (Math.random() - 0.5) * 160;
-      const dy = -(60 + Math.random() * 120);
-      const rot = (Math.random() - 0.5) * 12;
-      const dur = 10 + Math.random() * 8;
-      t.style.setProperty('--dx', dx + 'px');
-      t.style.setProperty('--dy', dy + 'px');
-      t.style.setProperty('--rot', rot + 'deg');
-      t.style.animationDuration = dur + 's';
-      wrap.appendChild(t);
-      setTimeout(() => t.remove(), dur * 1000 + 200);
+      const item = nextItem();
+      const el = document.createElement('div');
+      el.className = 'floating-item ' + item.kind + (item.slug ? '' : ' text-only');
+      if (item.slug) {
+        const img = document.createElement('img');
+        img.className = 'floating-logo';
+        img.src = 'https://cdn.simpleicons.org/' + item.slug + '/e6edf3';
+        img.alt = '';
+        img.loading = 'eager';
+        img.referrerPolicy = 'no-referrer';
+        img.onerror = () => { img.remove(); el.classList.add('text-only'); };
+        el.appendChild(img);
+      }
+      const label = document.createElement('span');
+      label.className = 'floating-label';
+      label.textContent = item.label;
+      el.appendChild(label);
+
+      const startX = Math.random() * 95;
+      const startY = 20 + Math.random() * 70;
+      el.style.left = startX + '%';
+      el.style.top = startY + '%';
+      const dx = (Math.random() - 0.5) * 180;
+      const dy = -(80 + Math.random() * 140);
+      const rot = (Math.random() - 0.5) * 6;
+      const dur = 14 + Math.random() * 10;
+      el.style.setProperty('--dx', dx + 'px');
+      el.style.setProperty('--dy', dy + 'px');
+      el.style.setProperty('--rot', rot + 'deg');
+      el.style.animationDuration = dur + 's';
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), dur * 1000 + 200);
     }
-    for (let i = 0; i < count; i++) setTimeout(spawn, i * 900);
-    setInterval(spawn, 1600);
+
+    for (let i = 0; i < initialCount; i++) setTimeout(spawn, i * 700);
+    setInterval(spawn, 2400);
   })();
 
   /* 7. Skill-card neural graph on hover */
