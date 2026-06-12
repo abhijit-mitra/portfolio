@@ -1,4 +1,13 @@
+# --- Local-only: dev tooling (not part of the public portfolio) ---
 .claude/
 .claude-flow/
+.mcp.json
+CLAUDE.md
+
+# --- Local-only: private / interview material (must never be published) ---
+interview_answers.md
+pepper_interview_prep.md
+
+# --- Local-only: source assets not used by the published site ---
 abhi.jpg
 Profile.pdf
