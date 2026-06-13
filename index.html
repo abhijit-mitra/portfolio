@@ -888,57 +888,6 @@
              transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.55); }
     }
 
-    /* Custom AI cursor */
-    .ai-cursor, .ai-cursor-dot {
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: screen;
-      will-change: transform;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .ai-cursor {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(88,166,255,0.55);
-      border-radius: 50%;
-      transform: translate(-50%,-50%);
-      box-shadow:
-        0 0 18px rgba(88,166,255,0.35),
-        inset 0 0 14px rgba(88,166,255,0.25);
-    }
-    .ai-cursor::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 1px dashed rgba(188,140,255,0.45);
-      animation: spin 6s linear infinite;
-    }
-    .ai-cursor-dot {
-      width: 6px; height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      transform: translate(-50%,-50%);
-      box-shadow: 0 0 10px var(--accent);
-    }
-    .ai-cursor.active { transform: translate(-50%,-50%) scale(1.6); border-color: var(--purple); }
-    body.ai-cursor-on { cursor: none; }
-    body.ai-cursor-on a, body.ai-cursor-on button { cursor: none; }
-    @media (hover: none), (max-width: 900px) {
-      body.ai-cursor-on { cursor: auto; }
-      body.ai-cursor-on a, body.ai-cursor-on button { cursor: pointer; }
-      .ai-cursor, .ai-cursor-dot { display: none; }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes spin-reverse {
-      to { transform: rotate(-360deg); }
-    }
-
     /* Agent active nav badge */
     .ai-status {
       display: inline-flex;
@@ -982,58 +931,6 @@
     }
     @media (max-width: 768px) {
       .ai-status { display: none; }
-    }
-
-    /* Floating AI tokens */
-    .floating-tokens {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-    .floating-item {
-      position: absolute;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 11px 5px 8px;
-      border-radius: 999px;
-      background: rgba(22, 27, 34, 0.55);
-      border: 1px solid rgba(48, 54, 61, 0.7);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(230,237,243,0.78);
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-      animation: drift linear infinite;
-      opacity: 0;
-      will-change: transform, opacity;
-    }
-    .floating-item.skill {
-      border-color: rgba(88,166,255,0.35);
-      box-shadow: 0 0 16px rgba(88,166,255,0.10);
-    }
-    .floating-item.company {
-      border-color: rgba(188,140,255,0.35);
-      box-shadow: 0 0 16px rgba(188,140,255,0.10);
-    }
-    .floating-item.text-only { padding-left: 11px; }
-    .floating-logo {
-      width: 14px;
-      height: 14px;
-      display: block;
-      flex-shrink: 0;
-      opacity: 0.9;
-    }
-    @keyframes drift {
-      0%   { transform: translate3d(0,0,0) rotate(var(--rot,0deg)); opacity: 0; }
-      12%  { opacity: 0.85; }
-      88%  { opacity: 0.85; }
-      100% { transform: translate3d(var(--dx,40px), var(--dy,-60px), 0) rotate(var(--rot,0deg)); opacity: 0; }
     }
 
     /* Subtitle typewriter caret */
@@ -1104,7 +1001,6 @@
 
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
-      .floating-item, .ai-cursor::before,
       .skill-card .skill-graph line, .ai-status .pulse-dot,
       .typewriter-caret, .logo-svg .seg {
         animation: none !important;
@@ -1190,7 +1086,6 @@
 
 <!-- ─── HERO ─────────────────────────────────────────────── -->
 <section class="hero" id="home">
-  <div class="floating-tokens" id="floatingTokens" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-text">
     <h1>
@@ -1724,10 +1619,6 @@
   <p>© 2026 Abhijit Mitra · Bengaluru, India · <a href="https://www.linkedin.com/in/abhijit-mitra-a238ab13b/" target="_blank">LinkedIn</a></p>
 </footer>
 
-<!-- AI cursor -->
-<div class="ai-cursor" id="aiCursor" aria-hidden="true"></div>
-<div class="ai-cursor-dot" id="aiCursorDot" aria-hidden="true"></div>
-
 <script>
   // Mobile nav toggle
   function toggleNav() {
@@ -1839,41 +1730,6 @@
     logo.addEventListener('click', (e) => { /* allow scroll; just replay */ replay(); });
   })();
 
-  /* 2. Custom AI cursor */
-  (function initCursor() {
-    if (isTouch || reduceMotion) return;
-    document.body.classList.add('ai-cursor-on');
-    const ring = document.getElementById('aiCursor');
-    const dot = document.getElementById('aiCursorDot');
-    let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
-    let rx = tx, ry = ty;
-    let shown = false;
-
-    window.addEventListener('mousemove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      if (!shown) {
-        ring.style.opacity = '1'; dot.style.opacity = '1';
-        shown = true;
-      }
-    });
-    document.querySelectorAll('a, button, .skill-pill, .about-card, .achieve-card').forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('active'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('active'));
-    });
-    function loop() {
-      rx += (tx - rx) * 0.18;
-      ry += (ty - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
-      dot.style.transform = `translate(${tx}px, ${ty}px) translate(-50%,-50%)`;
-      // keep cursor-active scale combined
-      if (ring.classList.contains('active')) {
-        ring.style.transform += ' scale(1.6)';
-      }
-      requestAnimationFrame(loop);
-    }
-    loop();
-  })();
-
   /* 3. Text scramble decode for "Mitra" */
   (function initDecode() {
     if (reduceMotion) return;
@@ -1927,100 +1783,6 @@
       setTimeout(() => { el.textContent = states[i]; el.style.opacity = '1'; }, 220);
     }, 2800);
     el.style.transition = 'opacity 0.22s';
-  })();
-
-  /* 6. Floating company + skill pills in hero */
-  (function initTokens() {
-    if (reduceMotion) return;
-    const wrap = document.getElementById('floatingTokens');
-    if (!wrap) return;
-
-    // kind: 'company' or 'skill'; slug = simpleicons.org slug if available
-    const items = [
-      // Companies
-      { label: 'Parspec',      kind: 'company' },
-      { label: 'Spotnana',     kind: 'company' },
-      { label: 'IKEA',         kind: 'company', slug: 'ikea' },
-      { label: 'Locus.sh',     kind: 'company' },
-      { label: 'Tekion',       kind: 'company' },
-      { label: 'Brookfield',   kind: 'company' },
-      { label: 'CoWrks',       kind: 'company' },
-      { label: 'HurixDigital', kind: 'company' },
-      // Skills (slug = simpleicons.org)
-      { label: 'Python',         kind: 'skill', slug: 'python' },
-      { label: 'TypeScript',     kind: 'skill', slug: 'typescript' },
-      { label: 'JavaScript',     kind: 'skill', slug: 'javascript' },
-      { label: 'Go',             kind: 'skill', slug: 'go' },
-      { label: 'React',          kind: 'skill', slug: 'react' },
-      { label: 'Next.js',        kind: 'skill', slug: 'nextdotjs' },
-      { label: 'Redux',          kind: 'skill', slug: 'redux' },
-      { label: 'Node.js',        kind: 'skill', slug: 'nodedotjs' },
-      { label: 'Django',         kind: 'skill', slug: 'django' },
-      { label: 'GraphQL',        kind: 'skill', slug: 'graphql' },
-      { label: 'AWS',            kind: 'skill' },
-      { label: 'Docker',         kind: 'skill', slug: 'docker' },
-      { label: 'Kubernetes',     kind: 'skill', slug: 'kubernetes' },
-      { label: 'PostgreSQL',     kind: 'skill', slug: 'postgresql' },
-      { label: 'MongoDB',        kind: 'skill', slug: 'mongodb' },
-      { label: 'Redis',          kind: 'skill', slug: 'redis' },
-      { label: 'Elasticsearch',  kind: 'skill', slug: 'elasticsearch' },
-      { label: 'Kafka',          kind: 'skill', slug: 'apachekafka' },
-      { label: 'RabbitMQ',       kind: 'skill', slug: 'rabbitmq' },
-      { label: 'GitHub Actions', kind: 'skill', slug: 'githubactions' },
-      { label: 'Anthropic',      kind: 'skill', slug: 'anthropic' },
-      // AI / agentic — no logo, text only
-      { label: 'Claude Code',    kind: 'skill' },
-      { label: 'MCP',            kind: 'skill' },
-      { label: 'Multi-Agent',    kind: 'skill' },
-    ];
-
-    // shuffle so initial spawns are varied
-    const queue = items.slice().sort(() => Math.random() - 0.5);
-    let qi = 0;
-    function nextItem() {
-      if (qi >= queue.length) { queue.sort(() => Math.random() - 0.5); qi = 0; }
-      return queue[qi++];
-    }
-
-    const initialCount = window.innerWidth < 700 ? 4 : 7;
-
-    function spawn() {
-      const item = nextItem();
-      const el = document.createElement('div');
-      el.className = 'floating-item ' + item.kind + (item.slug ? '' : ' text-only');
-      if (item.slug) {
-        const img = document.createElement('img');
-        img.className = 'floating-logo';
-        img.src = 'https://cdn.simpleicons.org/' + item.slug + '/e6edf3';
-        img.alt = '';
-        img.loading = 'eager';
-        img.referrerPolicy = 'no-referrer';
-        img.onerror = () => { img.remove(); el.classList.add('text-only'); };
-        el.appendChild(img);
-      }
-      const label = document.createElement('span');
-      label.className = 'floating-label';
-      label.textContent = item.label;
-      el.appendChild(label);
-
-      const startX = Math.random() * 95;
-      const startY = 20 + Math.random() * 70;
-      el.style.left = startX + '%';
-      el.style.top = startY + '%';
-      const dx = (Math.random() - 0.5) * 180;
-      const dy = -(80 + Math.random() * 140);
-      const rot = (Math.random() - 0.5) * 6;
-      const dur = 14 + Math.random() * 10;
-      el.style.setProperty('--dx', dx + 'px');
-      el.style.setProperty('--dy', dy + 'px');
-      el.style.setProperty('--rot', rot + 'deg');
-      el.style.animationDuration = dur + 's';
-      wrap.appendChild(el);
-      setTimeout(() => el.remove(), dur * 1000 + 200);
-    }
-
-    for (let i = 0; i < initialCount; i++) setTimeout(spawn, i * 700);
-    setInterval(spawn, 2400);
   })();
 
   /* 7. Skill-card neural graph on hover */
