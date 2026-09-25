@@ -1,0 +1,17 @@
+name: Add resume PDF
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p assets
+          curl -fsSL -o assets/abhijit_mitra_resume.pdf https://files.catbox.moe/q73o40.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/abhijit_mitra_resume.pdf
+          git commit -m "Add resume PDF" || echo "no changes"
+          git push
