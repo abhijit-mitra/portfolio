@@ -1,5 +1,8 @@
 name: Add resume PDF
-on: workflow_dispatch
+on:
+  push:
+    paths: [.github/workflows/add-resume.yml]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
