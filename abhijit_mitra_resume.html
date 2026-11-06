@@ -19,8 +19,11 @@
     margin: 0 auto;
     padding: 36px 44px;
   }
-  @page { margin: 32px 0 32px 0; }
+  @page { size: letter; margin: 32px 0 32px 0; }
   @page :first { margin: 0 0 32px 0; }
+  li { break-inside: avoid; box-decoration-break: clone; }
+  .section-title { break-after: avoid; }
+  .exp-header, .edu-entry { break-inside: avoid; }
   @media print {
     body { font-size: 10pt; margin: 0; }
     .page { padding: 36px 44px; max-width: 100%; }
@@ -267,7 +270,7 @@
       <span class="skills-label">Backend</span>
       <span class="skills-value">Django, Node.js, Express.js, GraphQL, Distributed Systems, Microservices</span>
       <span class="skills-label">AI / Agents</span>
-      <span class="skills-value">Agent Orchestration, Multi-Agent Systems, Autonomous Agents, LLM Tool/Function Calling, Structured Outputs, RAG, Agent Evals & Observability, Intent/Reply Classification, Human-in-the-Loop Guardrails, Persistent & Shared Agent Memory, Prompt Engineering, Voice Agents, MCP (Jira, Confluence, Figma), Claude / OpenRouter, OCR & ML Extraction, Confidence Scoring, Agentic CI/CD</span>
+      <span class="skills-value">Agent Orchestration, Multi-Agent Systems, Autonomous Agents, LangChain, LangGraph, LangFuse, CrewAI, LLM Tool/Function Calling, Structured Outputs, RAG, Agent Evals & Observability, Intent/Reply Classification, Human-in-the-Loop Guardrails, Persistent & Shared Agent Memory, Prompt Engineering, Voice Agents, MCP (Jira, Confluence, Figma), Claude / OpenRouter, OCR & ML Extraction, Confidence Scoring, Agentic CI/CD</span>
       <span class="skills-label">Frontend</span>
       <span class="skills-value">React, Redux, Next.js</span>
       <span class="skills-label">Databases</span>
